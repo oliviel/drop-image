@@ -1,0 +1,80 @@
+import React, { useRef } from 'react';
+import { BsXCircleFill } from "react-icons/bs";
+import './ImageUploader.scss';
+
+export const ImageUploader = (props) => {
+  const { 
+    dropZoneClassName, 
+    dropZoneStyle,
+    dropZoneLabel,
+    onDrop,
+    onRemoveFile,
+    filesUploaded
+  } = props
+
+  const fileInput = useRef(null);
+  
+  return (  
+    <div 
+      className={`dropzone-container ${dropZoneClassName}`}
+      style={dropZoneStyle}
+    >
+      <input 
+        ref={fileInput}
+        type="file" 
+        id="file-browser-input" 
+        name="file-browser-input" 
+        onDragOver={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+        onChange={onDrop}
+      />
+      <div className="files-preview-container">
+        {/* {loadedFiles.map((file) => (
+          <div className="file" key={file.id}>
+            <img src={file.data}/>
+            <div className="container">
+              <span className="progress-bar">
+                {file.isUploading && <span>Loading...</span> }
+              </span>
+              <span className="remove-btn" onClick={() => removeLoadedFile(file)}>
+                <BsXCircleFill size={19} />
+              </span>
+            </div>
+          </div>
+        ))} */}
+         {filesUploaded.map((file, index) => (
+          <div className="file" key={index}>
+            <img src={file.data} />
+            <div className="container">
+              <span className="progress-bar">
+                {file.isUploading && <span>Loading...</span> }
+              </span>
+              <span className="remove-btn" onClick={() => onRemoveFile(file, index)}>
+                <BsXCircleFill size={19} />
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="helper-text" 
+        onClick={() => fileInput.current.click()}  
+        >
+          {dropZoneLabel}
+      </div>
+      <div className="file-browser-container" >
+        <button 
+        onClick={() => fileInput.current.click()}  
+        >
+          drag here
+        </button>
+      </div>
+    </div>
+  );
+}
+
+ImageUploader.defaultProps = {
+  dropZoneLabel: 'Drag and drop images here or click this area'
+}
+ 
