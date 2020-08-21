@@ -11,8 +11,6 @@ function App() {
 
     const fileReader = new FileReader();
 
-    console.log(currentFile)
-
     fileReader.onload = () => {
       const file = {
         name: currentFile.name,
