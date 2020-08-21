@@ -55,10 +55,10 @@ export const ImageUploader = (props) => {
         <div className="files-preview-container">
           {filesUploaded.map((file, index) => (
             <div className="file" key={index}>
-              <img src={file.data} alt={file.data} />
+              <img src={file.data} alt={file.name} />
               <div className="container">
                 <span className="progress-bar">
-                  {isImageUploading && <ReactLoading type="balls" color="red" height={75} width={75} /> }
+                  {isImageUploading && <ReactLoading type="balls" color="#939494" height={75} width={75} /> }
                 </span>
                 <span className="remove-btn" onClick={() => onRemove(file, index)}>
                   <BsXCircleFill size={19} />
@@ -68,7 +68,7 @@ export const ImageUploader = (props) => {
           ))}
         </div>
         <div 
-          className="helper-text" 
+          className="secondary-text" 
           onClick={() => fileInput.current.click()}  
         >
           {dropZoneLabel}

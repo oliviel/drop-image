@@ -6,9 +6,12 @@ function App() {
   const [loadedFiles, setLoadedFiles] = useState([]);
 
   function handleFileUpload(e) {
+    
     const currentFile = e.currentTarget.files[0];
 
     const fileReader = new FileReader();
+
+    console.log(currentFile)
 
     fileReader.onload = () => {
       const file = {
@@ -49,7 +52,7 @@ function App() {
   }
 
   function onUpload(params) {
-    console.log('I am here')
+    console.log('I am here');
   }
 
   return (
